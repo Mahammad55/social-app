@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-04-10-03-01
+      author: mahammad
+      changes:
+        - createTable:
+            tableName: comments
+            remarks: Table to store information about comments
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: text
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValue: NOW()
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_comments_to_users
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_comments_to_posts
+                    references: posts(id)
+                    nullable: false
