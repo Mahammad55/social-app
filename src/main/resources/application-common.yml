@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: social-app
+
+server:
+  port: 9090
+  servlet:
+    context-path: /social
