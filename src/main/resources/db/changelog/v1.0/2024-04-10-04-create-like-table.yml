@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-04-10-04-01
+      author: mahammad
+      changes:
+        - createTable:
+            tableName: likes
+            remarks: Table to store information about likes
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValue: NOW()
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_likes_to_users
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_likes_to_posts
+                    references: posts(id)
+                    nullable: false
+              - column:
+                  name: comment_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_likes_to_comments
+                    references: comments(id)
+                    nullable: false
