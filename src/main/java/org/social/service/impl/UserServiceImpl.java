@@ -52,6 +52,17 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToResponse(savedUser);
     }
 
+    @Override
+    public Boolean deleteUserByUsername(String username) {
+        try {
+            User user = userRepository.findUserByUsername(username).get();
+            userRepository.delete(user);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
     private User updateUser(User user, User requestUser) {
         Optional.ofNullable(requestUser.getName()).ifPresent(user::setName);
         Optional.ofNullable(requestUser.getSurname()).ifPresent(user::setSurname);

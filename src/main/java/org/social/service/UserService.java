@@ -13,4 +13,6 @@ public interface UserService {
     UserResponse getUserByUsername(String username);
 
     UserResponse updateUserByUsername(String username, UserRequest userRequest);
+
+    Boolean deleteUserByUsername(String username);
 }
