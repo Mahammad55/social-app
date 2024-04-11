@@ -1,5 +1,6 @@
 package org.social.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,6 @@ public class UserResponse {
 
     private String email;
 
+    @JsonFormat(pattern = "YYYY-MMMM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate birthDate;
 }

@@ -1,7 +1,11 @@
 package org.social.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.social.dto.request.UserRequest;
+import org.social.dto.response.UserResponse;
 import org.social.service.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,4 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @PostMapping
+    public UserResponse saveUser(@RequestBody UserRequest userRequest) {
+        return userService.saveUser(userRequest);
+    }
 }
