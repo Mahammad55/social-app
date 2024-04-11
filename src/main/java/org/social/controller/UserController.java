@@ -23,4 +23,9 @@ public class UserController {
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @GetMapping("/{username}")
+    public UserResponse getUserByUsername(@PathVariable String username){
+        return userService.getUserByUsername(username);
+    }
 }

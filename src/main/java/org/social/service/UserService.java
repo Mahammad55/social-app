@@ -9,4 +9,6 @@ public interface UserService {
     UserResponse saveUser(UserRequest userRequest);
 
     List<UserResponse> getAllUsers();
+
+    UserResponse getUserByUsername(String username);
 }

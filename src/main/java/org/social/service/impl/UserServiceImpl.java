@@ -32,4 +32,10 @@ public class UserServiceImpl implements UserService {
         List<User> allUsers = userRepository.findAll();
         return allUsers.stream().map(userMapper::entityToResponse).toList();
     }
+
+    @Override
+    public UserResponse getUserByUsername(String username) {
+        User user = userRepository.findUserByUsername(username).get();
+        return userMapper.entityToResponse(user);
+    }
 }
