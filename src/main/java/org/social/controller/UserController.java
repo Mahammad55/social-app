@@ -30,12 +30,12 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    @PutMapping("{username}")
+    @PutMapping("/{username}")
     public UserResponse updateUserByUsername(@PathVariable String username, @RequestBody UserRequest userRequest) {
         return userService.updateUserByUsername(username, userRequest);
     }
 
-    @DeleteMapping("{username}")
+    @DeleteMapping("/{username}")
     public ResponseEntity<String> deleteUserByUsername(@PathVariable String username) {
         if (userService.deleteUserByUsername(username)) {
             return ResponseEntity.ok("User has been successfully deleted!");
