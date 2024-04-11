@@ -1,5 +1,6 @@
 package org.social.service;
 
+import org.social.dto.request.PostRequest;
 import org.social.dto.response.PostResponse;
 
 import java.util.List;
@@ -7,5 +8,7 @@ import java.util.List;
 public interface PostService {
     List<PostResponse> getAllPosts();
 
-    List<PostResponse> getAllPostsByUsername(String username);
+    List<PostResponse> getAllPostsByUser(String username);
+
+    PostResponse savePostByUser(String username, PostRequest postRequest);
 }

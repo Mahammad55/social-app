@@ -1,6 +1,7 @@
 package org.social.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.social.dto.request.PostRequest;
 import org.social.dto.response.PostResponse;
 import org.social.entity.Post;
 import org.social.entity.User;
@@ -29,9 +30,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostResponse> getAllPostsByUsername(String username) {
+    public List<PostResponse> getAllPostsByUser(String username) {
         User user = userRepository.findUserByUsername(username).get();
         List<Post> allPosts = postRepository.findAllByUser(user);
         return allPosts.stream().map(postMapper::entityToResponse).toList();
+    }
+
+    @Override
+    public PostResponse savePostByUser(String username, PostRequest postRequest) {
+        User user = userRepository.findUserByUsername(username).get();
+        Post post = postMapper.requestToEntity(postRequest);
+        post.setUser(user);
+        Post savedPost = postRepository.save(post);
+        return postMapper.entityToResponse(savedPost);
     }
 }
