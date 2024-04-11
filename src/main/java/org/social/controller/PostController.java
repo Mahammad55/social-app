@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.social.dto.request.PostRequest;
 import org.social.dto.response.PostResponse;
 import org.social.service.PostService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,14 @@ public class PostController {
 
     @PutMapping("{id}")
     public PostResponse updatePostById(@PathVariable(value = "id") Long postId, @RequestBody PostRequest postRequest) {
-        return postService.updatePostById(postId,postRequest);
+        return postService.updatePostById(postId, postRequest);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePostById(@PathVariable(value = "id") Long postId) {
+        if (postService.deletePostById(postId)) {
+            return ResponseEntity.ok("Post has been successfully deleted!");
+        }
+        return ResponseEntity.badRequest().body("Post can not deleted!");
     }
 }

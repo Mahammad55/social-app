@@ -13,4 +13,6 @@ public interface PostService {
     PostResponse savePostByUser(String username, PostRequest postRequest);
 
     PostResponse updatePostById(Long postId, PostRequest postRequest);
+
+    Boolean deletePostById(Long postId);
 }

@@ -53,4 +53,15 @@ public class PostServiceImpl implements PostService {
         Post savedPost = postRepository.save(post);
         return postMapper.entityToResponse(savedPost);
     }
+
+    @Override
+    public Boolean deletePostById(Long postId) {
+        try {
+            Post post = postRepository.findById(postId).get();
+            postRepository.delete(post);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }
