@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.social.dto.request.UserRequest;
 import org.social.dto.response.UserResponse;
 import org.social.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -18,5 +17,10 @@ public class UserController {
     @PostMapping
     public UserResponse saveUser(@RequestBody UserRequest userRequest) {
         return userService.saveUser(userRequest);
+    }
+
+    @GetMapping
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers();
     }
 }

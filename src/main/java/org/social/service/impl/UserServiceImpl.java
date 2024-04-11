@@ -10,6 +10,8 @@ import org.social.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -23,5 +25,11 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.requestToEntity(userRequest);
         User savedUser = userRepository.save(user);
         return userMapper.entityToResponse(savedUser);
+    }
+
+    @Override
+    public List<UserResponse> getAllUsers() {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers.stream().map(userMapper::entityToResponse).toList();
     }
 }
