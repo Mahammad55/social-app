@@ -11,4 +11,6 @@ public interface UserService {
     List<UserResponse> getAllUsers();
 
     UserResponse getUserByUsername(String username);
+
+    UserResponse updateUserByUsername(String username, UserRequest userRequest);
 }

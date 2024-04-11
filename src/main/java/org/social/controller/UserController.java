@@ -25,7 +25,12 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public UserResponse getUserByUsername(@PathVariable String username){
+    public UserResponse getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
+    }
+
+    @PutMapping("{username}")
+    public UserResponse updateUserByUsername(@PathVariable String username, @RequestBody UserRequest userRequest) {
+        return userService.updateUserByUsername(username, userRequest);
     }
 }

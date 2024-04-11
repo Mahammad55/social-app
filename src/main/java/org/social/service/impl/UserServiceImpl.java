@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,14 +29,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<UserResponse> getAllUsers() {
         List<User> allUsers = userRepository.findAll();
         return allUsers.stream().map(userMapper::entityToResponse).toList();
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public UserResponse getUserByUsername(String username) {
         User user = userRepository.findUserByUsername(username).get();
         return userMapper.entityToResponse(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public UserResponse updateUserByUsername(String username, UserRequest userRequest) {
+        User user = userRepository.findUserByUsername(username).get();
+        User requestUser = userMapper.requestToEntity(userRequest);
+        User updateUser = updateUser(user, requestUser);
+        User savedUser = userRepository.save(updateUser);
+        return userMapper.entityToResponse(savedUser);
+    }
+
+    private User updateUser(User user, User requestUser) {
+        Optional.ofNullable(requestUser.getName()).ifPresent(user::setName);
+        Optional.ofNullable(requestUser.getSurname()).ifPresent(user::setSurname);
+        Optional.ofNullable(requestUser.getBirthDate()).ifPresent(user::setBirthDate);
+        return user;
     }
 }
