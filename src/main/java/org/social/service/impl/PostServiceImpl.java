@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,14 @@ public class PostServiceImpl implements PostService {
         User user = userRepository.findUserByUsername(username).get();
         Post post = postMapper.requestToEntity(postRequest);
         post.setUser(user);
+        Post savedPost = postRepository.save(post);
+        return postMapper.entityToResponse(savedPost);
+    }
+
+    @Override
+    public PostResponse updatePostById(Long postId, PostRequest postRequest) {
+        Post post = postRepository.findById(postId).get();
+        Optional.ofNullable(postRequest.getText()).ifPresent(post::setText);
         Post savedPost = postRepository.save(post);
         return postMapper.entityToResponse(savedPost);
     }

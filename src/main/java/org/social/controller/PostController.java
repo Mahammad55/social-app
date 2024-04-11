@@ -25,7 +25,12 @@ public class PostController {
     }
 
     @PostMapping("{username}")
-    public PostResponse savePostByUser(@PathVariable String username,@RequestBody PostRequest postRequest){
-        return postService.savePostByUser(username,postRequest);
+    public PostResponse savePostByUser(@PathVariable String username, @RequestBody PostRequest postRequest) {
+        return postService.savePostByUser(username, postRequest);
+    }
+
+    @PutMapping("{id}")
+    public PostResponse updatePostById(@PathVariable(value = "id") Long postId, @RequestBody PostRequest postRequest) {
+        return postService.updatePostById(postId,postRequest);
     }
 }

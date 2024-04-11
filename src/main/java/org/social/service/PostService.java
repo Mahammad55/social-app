@@ -11,4 +11,6 @@ public interface PostService {
     List<PostResponse> getAllPostsByUser(String username);
 
     PostResponse savePostByUser(String username, PostRequest postRequest);
+
+    PostResponse updatePostById(Long postId, PostRequest postRequest);
 }
