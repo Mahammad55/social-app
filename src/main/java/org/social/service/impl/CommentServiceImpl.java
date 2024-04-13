@@ -1,6 +1,8 @@
 package org.social.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.social.dto.request.CommentRequest;
 import org.social.dto.response.CommentResponse;
 import org.social.entity.Comment;
 import org.social.entity.Post;
@@ -37,5 +39,17 @@ public class CommentServiceImpl implements CommentService {
         User user = userRepository.findUserByUsername(username).get();
         List<Comment> comments = commentRepository.findAllByUser(user).get();
         return comments.stream().map(commentMapper::entityToResponse).toList();
+    }
+
+    @Override
+    @Transactional
+    public CommentResponse saveCommentByUserAndPostId(String username, Long postId, CommentRequest commentRequest) {
+        User user = userRepository.findUserByUsername(username).get();
+        Post post = postRepository.findById(postId).get();
+        Comment comment = commentMapper.requestToEntity(commentRequest);
+        comment.setUser(user);
+        comment.setPost(post);
+        Comment savedComment = commentRepository.save(comment);
+        return commentMapper.entityToResponse(savedComment);
     }
 }

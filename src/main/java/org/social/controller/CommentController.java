@@ -1,12 +1,10 @@
 package org.social.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.social.dto.request.CommentRequest;
 import org.social.dto.response.CommentResponse;
 import org.social.service.CommentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,11 @@ public class CommentController {
     @GetMapping("/user/{username}")
     public List<CommentResponse> getAllCommentByUser(@PathVariable String username) {
         return commentService.getAllCommentByUserId(username);
+    }
+
+    @PostMapping("/{username}/{id}")
+    public CommentResponse saveCommentByUserAndPostId(@PathVariable String username, @PathVariable(value = "id") Long postId,
+                                                      @RequestBody CommentRequest commentRequest) {
+        return commentService.saveCommentByUserAndPostId(username,postId,commentRequest);
     }
 }
