@@ -16,12 +16,12 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public List<PostResponse> getAllPosts() {
+    public List<PostResponse> getAllPost() {
         return postService.getAllPosts();
     }
 
     @GetMapping("{username}")
-    public List<PostResponse> getAllPostsByUser(@PathVariable String username) {
+    public List<PostResponse> getAllPostByUser(@PathVariable String username) {
         return postService.getAllPostsByUser(username);
     }
 
