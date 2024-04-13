@@ -13,4 +13,6 @@ public interface CommentService {
     CommentResponse saveCommentByUserAndPostId(String username, Long postId, CommentRequest commentRequest);
 
     CommentResponse updateCommentByUserAndPostId(String username, Long postId, Long commentId, CommentRequest commentRequest);
+
+    boolean deleteCommentByUserAndPostId(String username, Long postId, Long commentId);
 }

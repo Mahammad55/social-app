@@ -61,8 +61,21 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentRepository.findById(commentId).get();
         if (comment.getUser().equals(user) && comment.getPost().equals(post)) {
             Optional.ofNullable(commentRequest.getText()).ifPresent(comment::setText);
+            Comment savedComment = commentRepository.save(comment);
+            return commentMapper.entityToResponse(savedComment);
         }
-        Comment savedComment = commentRepository.save(comment);
-        return commentMapper.entityToResponse(savedComment);
+        return null;
+    }
+
+    @Override
+    public boolean deleteCommentByUserAndPostId(String username, Long postId, Long commentId) {
+        User user = userRepository.findUserByUsername(username).get();
+        Post post = postRepository.findById(postId).get();
+        Comment comment = commentRepository.findById(commentId).get();
+        if (comment.getUser().equals(user) && comment.getPost().equals(post)) {
+            commentRepository.delete(comment);
+            return true;
+        }
+        return false;
     }
 }
