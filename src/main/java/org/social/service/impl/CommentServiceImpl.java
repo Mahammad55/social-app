@@ -15,6 +15,7 @@ import org.social.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +50,18 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentMapper.requestToEntity(commentRequest);
         comment.setUser(user);
         comment.setPost(post);
+        Comment savedComment = commentRepository.save(comment);
+        return commentMapper.entityToResponse(savedComment);
+    }
+
+    @Override
+    public CommentResponse updateCommentByUserAndPostId(String username, Long postId, Long commentId, CommentRequest commentRequest) {
+        User user = userRepository.findUserByUsername(username).get();
+        Post post = postRepository.findById(postId).get();
+        Comment comment = commentRepository.findById(commentId).get();
+        if (comment.getUser().equals(user) && comment.getPost().equals(post)) {
+            Optional.ofNullable(commentRequest.getText()).ifPresent(comment::setText);
+        }
         Comment savedComment = commentRepository.save(comment);
         return commentMapper.entityToResponse(savedComment);
     }

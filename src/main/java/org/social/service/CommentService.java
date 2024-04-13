@@ -11,4 +11,6 @@ public interface CommentService {
     List<CommentResponse> getAllCommentByUserId(String username);
 
     CommentResponse saveCommentByUserAndPostId(String username, Long postId, CommentRequest commentRequest);
+
+    CommentResponse updateCommentByUserAndPostId(String username, Long postId, Long commentId, CommentRequest commentRequest);
 }

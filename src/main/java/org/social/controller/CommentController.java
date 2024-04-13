@@ -27,6 +27,12 @@ public class CommentController {
     @PostMapping("/{username}/{id}")
     public CommentResponse saveCommentByUserAndPostId(@PathVariable String username, @PathVariable(value = "id") Long postId,
                                                       @RequestBody CommentRequest commentRequest) {
-        return commentService.saveCommentByUserAndPostId(username,postId,commentRequest);
+        return commentService.saveCommentByUserAndPostId(username, postId, commentRequest);
+    }
+
+    @PutMapping("/{username}/{postId}/{commentId}")
+    public CommentResponse updateCommentByUserAndPostId(@PathVariable String username, @PathVariable Long postId, @PathVariable Long commentId,
+                                                        @RequestBody CommentRequest commentRequest) {
+        return commentService.updateCommentByUserAndPostId(username, postId, commentId, commentRequest);
     }
 }
