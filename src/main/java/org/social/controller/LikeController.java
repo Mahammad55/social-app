@@ -20,4 +20,9 @@ public class LikeController {
     public List<LikePostResponse> getAllLikePostByUser(@PathVariable String username) {
         return likeService.getAllLikeByUser(username);
     }
+
+    @GetMapping("/post/{id}")
+    public List<LikePostResponse> getAllLikeByPost(@PathVariable(value = "id") Long postId){
+        return likeService.getAllLikeByPost(postId);
+    }
 }

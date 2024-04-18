@@ -22,4 +22,10 @@ public class LikeServiceImpl implements LikeService {
         List<Like> likeList = likeRepository.findAllByUserUsername(username).get();
         return likeList.stream().map(likeMapper::entityToPostResponse).toList();
     }
+
+    @Override
+    public List<LikePostResponse> getAllLikeByPost(Long postId) {
+        List<Like> likeList = likeRepository.findAllByPostId(postId).get();
+        return likeList.stream().map(likeMapper::entityToPostResponse).toList();
+    }
 }

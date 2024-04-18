@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LikeService {
     List<LikePostResponse> getAllLikeByUser(String username);
+
+    List<LikePostResponse> getAllLikeByPost(Long postId);
 }
