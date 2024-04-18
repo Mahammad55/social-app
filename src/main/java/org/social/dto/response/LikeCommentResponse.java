@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 public class LikeCommentResponse {
     private Long id;
 
-    private String commentedUsername;
-
     private String likedUsername;
+
+    private String commentedUsername;
 
     private LocalDateTime createdAt;
 }
