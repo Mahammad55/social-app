@@ -31,7 +31,6 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_likes_to_posts
                     references: posts(id)
-                    nullable: false
               - column:
                   name: comment_id
                   type: BIGINT
