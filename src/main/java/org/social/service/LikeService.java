@@ -15,4 +15,6 @@ public interface LikeService {
     LikePostResponse saveLikeByPost(String username, Long postId);
 
     LikeCommentResponse saveLikeByComment(String username, Long commentId);
+
+    boolean deleteLikeByLikeId(String username, Long postId, Long likeId);
 }

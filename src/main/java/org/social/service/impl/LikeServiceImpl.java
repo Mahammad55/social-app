@@ -67,6 +67,17 @@ public class LikeServiceImpl implements LikeService {
         like.setUser(user);
         like.setComment(comment);
         Like savedLike = likeRepository.save(like);
-        return likeMapper.entityToCommentResponse(savedLike); 
+        return likeMapper.entityToCommentResponse(savedLike);
+    }
+
+    @Override
+    public boolean deleteLikeByLikeId(String username, Long postId, Long likeId) {
+        User user = userRepository.findUserByUsername(username).get();
+        Post post = postRepository.findById(postId).get();
+        if (user.getUsername().equals(post.getUser().getUsername())) {
+            likeRepository.deleteById(likeId);
+            return true;
+        }
+        return false; 
     }
 }

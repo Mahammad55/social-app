@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.social.dto.response.LikeCommentResponse;
 import org.social.dto.response.LikePostResponse;
 import org.social.service.LikeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +38,12 @@ public class LikeController {
     @PostMapping("/comment/{username}/{id}")
     public LikeCommentResponse saveLikeByComment(@PathVariable String username, @PathVariable(value = "id") Long commentId) {
         return likeService.saveLikeByComment(username, commentId);
+    }
+
+    @DeleteMapping("post/{username}/{postId}/{likeId}")
+    public ResponseEntity<String> deleteLikeByLikeId(@PathVariable String username, @PathVariable Long postId, @PathVariable Long likeId) {
+        if (likeService.deleteLikeByLikeId(username, postId, likeId))
+            return ResponseEntity.ok("Like has been successfully deleted!");
+        return ResponseEntity.badRequest().body("Like can not deleted!");
     }
 }
