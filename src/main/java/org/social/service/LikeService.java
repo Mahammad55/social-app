@@ -11,4 +11,6 @@ public interface LikeService {
     List<LikePostResponse> getAllLikeByPost(Long postId);
 
     List<LikeCommentResponse> getAllLikeByComment(Long commentId);
+
+    LikePostResponse saveLikeByPost(String username, Long postId);
 }

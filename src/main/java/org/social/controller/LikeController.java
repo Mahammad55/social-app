@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.social.dto.response.LikeCommentResponse;
 import org.social.dto.response.LikePostResponse;
 import org.social.service.LikeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,10 @@ public class LikeController {
     @GetMapping("/comment/{id}")
     public List<LikeCommentResponse> getAllLikeByComment(@PathVariable(value = "id") Long commentId) {
         return likeService.getAllLikeByComment(commentId);
+    }
+
+    @PostMapping("/post/{username}/{id}")
+    public LikePostResponse saveLikeByPost(@PathVariable String username, @PathVariable(value = "id") Long postId) {
+        return likeService.saveLikeByPost(username, postId);
     }
 }

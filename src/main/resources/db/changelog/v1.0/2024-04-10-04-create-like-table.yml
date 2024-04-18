@@ -38,4 +38,3 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_likes_to_comments
                     references: comments(id)
-                    nullable: false
