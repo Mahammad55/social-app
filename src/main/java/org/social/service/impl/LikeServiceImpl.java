@@ -1,6 +1,7 @@
 package org.social.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.social.dto.response.LikeCommentResponse;
 import org.social.dto.response.LikePostResponse;
 import org.social.entity.Like;
 import org.social.mapper.LikeMapper;
@@ -27,5 +28,11 @@ public class LikeServiceImpl implements LikeService {
     public List<LikePostResponse> getAllLikeByPost(Long postId) {
         List<Like> likeList = likeRepository.findAllByPostId(postId).get();
         return likeList.stream().map(likeMapper::entityToPostResponse).toList();
+    }
+
+    @Override
+    public List<LikeCommentResponse> getAllLikeByComment(Long commentId) {
+        List<Like> likeList = likeRepository.findAllByCommentId(commentId).get();
+        return likeList.stream().map(likeMapper::entityToCommentResponse).toList();
     }
 }
