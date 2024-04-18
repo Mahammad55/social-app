@@ -33,4 +33,9 @@ public class LikeController {
     public LikePostResponse saveLikeByPost(@PathVariable String username, @PathVariable(value = "id") Long postId) {
         return likeService.saveLikeByPost(username, postId);
     }
+
+    @PostMapping("/comment/{username}/{id}")
+    public LikeCommentResponse saveLikeByComment(@PathVariable String username, @PathVariable(value = "id") Long commentId) {
+        return likeService.saveLikeByComment(username, commentId);
+    }
 }

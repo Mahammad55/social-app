@@ -3,6 +3,7 @@ package org.social.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.social.dto.response.LikeCommentResponse;
 import org.social.dto.response.LikePostResponse;
+import org.social.entity.Comment;
 import org.social.entity.Like;
 import org.social.entity.Post;
 import org.social.entity.User;
@@ -56,5 +57,16 @@ public class LikeServiceImpl implements LikeService {
         like.setPost(post);
         Like savedLike = likeRepository.save(like);
         return likeMapper.entityToPostResponse(savedLike);
+    }
+
+    @Override
+    public LikeCommentResponse saveLikeByComment(String username, Long commentId) {
+        User user = userRepository.findUserByUsername(username).get();
+        Comment comment = commentRepository.findById(commentId).get();
+        Like like = new Like();
+        like.setUser(user);
+        like.setComment(comment);
+        Like savedLike = likeRepository.save(like);
+        return likeMapper.entityToCommentResponse(savedLike); 
     }
 }
