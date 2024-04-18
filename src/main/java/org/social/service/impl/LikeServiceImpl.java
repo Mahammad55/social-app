@@ -71,13 +71,24 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public boolean deleteLikeByLikeId(String username, Long postId, Long likeId) {
+    public boolean deleteLikeByPostId(String username, Long postId, Long likeId) {
         User user = userRepository.findUserByUsername(username).get();
         Post post = postRepository.findById(postId).get();
         if (user.getUsername().equals(post.getUser().getUsername())) {
             likeRepository.deleteById(likeId);
             return true;
         }
-        return false; 
+        return false;
+    }
+
+    @Override
+    public boolean deleteLikeByCommentId(String username, Long commentId, Long likeId) {
+        User user = userRepository.findUserByUsername(username).get();
+        Comment comment = commentRepository.findById(commentId).get();
+        if (user.getUsername().equals(comment.getUser().getUsername())) {
+            likeRepository.deleteById(likeId);
+            return true;
+        }
+        return false;
     }
 }

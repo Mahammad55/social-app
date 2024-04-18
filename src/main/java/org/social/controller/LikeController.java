@@ -40,9 +40,16 @@ public class LikeController {
         return likeService.saveLikeByComment(username, commentId);
     }
 
-    @DeleteMapping("post/{username}/{postId}/{likeId}")
-    public ResponseEntity<String> deleteLikeByLikeId(@PathVariable String username, @PathVariable Long postId, @PathVariable Long likeId) {
-        if (likeService.deleteLikeByLikeId(username, postId, likeId))
+    @DeleteMapping("/post/{username}/{postId}/{likeId}")
+    public ResponseEntity<String> deleteLikeByPostId(@PathVariable String username, @PathVariable Long postId, @PathVariable Long likeId) {
+        if (likeService.deleteLikeByPostId(username, postId, likeId))
+            return ResponseEntity.ok("Like has been successfully deleted!");
+        return ResponseEntity.badRequest().body("Like can not deleted!");
+    }
+
+    @DeleteMapping("/comment/{username}/{commentId}/{likeId}")
+    public ResponseEntity<String> deleteLikeByCommentId(@PathVariable String username, @PathVariable Long commentId, @PathVariable Long likeId) {
+        if (likeService.deleteLikeByCommentId(username, commentId, likeId))
             return ResponseEntity.ok("Like has been successfully deleted!");
         return ResponseEntity.badRequest().body("Like can not deleted!");
     }
