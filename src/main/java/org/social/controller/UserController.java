@@ -1,5 +1,6 @@
 package org.social.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.social.dto.request.UserRequest;
 import org.social.dto.response.UserResponse;
@@ -16,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public UserResponse saveUser(@RequestBody UserRequest userRequest) {
+    public UserResponse saveUser(@Valid @RequestBody UserRequest userRequest) {
         return userService.saveUser(userRequest);
     }
 
